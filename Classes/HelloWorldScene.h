@@ -8,7 +8,7 @@ class DropItem;
 class HelloWorld : public cocos2d::Layer
 {
 public:
-    constexpr static const float DROP_INTERVAL_DEFAULT = 1.0f;
+    constexpr static const float DROP_INTERVAL_DEFAULT = 0.2f;
     
 public:
     // there's no 'id' in cpp, so we recommend returning the class instance pointer

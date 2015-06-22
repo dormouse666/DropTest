@@ -121,19 +121,21 @@ void HelloWorld::updateGamePlaying(float dt)
 {
     _elapse += dt;
     
-    if(_elapse >= _dropInterval) //インターバル制御
-    {
         if (_dropItem)
         {
             if(_dropItem->canPlace(_dropItem, _backGround))
             {
             //下に動かす
             _dropItem->setPosition(_dropItem->getPosition().x,
-                                   _dropItem->getPosition().y - 30);
+                                   _dropItem->getPosition().y - 1);
             
-            //回転する
-            _itemRotate = _itemRotate + 20;
-            _dropItem->setRotation(_itemRotate);
+                if(_elapse >= _dropInterval) //インターバル制御
+                {
+                    //回転する
+                    _itemRotate = _itemRotate + 20;
+                    _dropItem->setRotation(_itemRotate);
+                    _elapse = 0.0f; //戻す
+                }
             }
             else
             {
@@ -146,6 +148,4 @@ void HelloWorld::updateGamePlaying(float dt)
             }
         }
         
-         _elapse = 0.0f; //戻す
-    }
 }
