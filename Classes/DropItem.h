@@ -32,6 +32,7 @@ public:
     virtual bool init();
     CREATE_FUNC(DropItem);
     
+    ColorType randomItemColor();
     void setItemType(ColorType type);
     
     bool canPlace(DropItem* _dropItem, cocos2d::Node* _backGround);

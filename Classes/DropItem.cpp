@@ -31,11 +31,38 @@ void DropItem::onEnter()
 {
     Node::onEnter();
 
-    setItemType(RED);
+    // アイテムカラーをランダムにしてセット
+    setItemType(randomItemColor());
 }
 void DropItem::onExit()
 {
     Node::onExit();
+}
+
+DropItem::ColorType DropItem::randomItemColor()
+{
+    std::random_device rnd; //乱数の生成
+    std::mt19937 mt(rnd()); //乱数生成器
+    
+    std::vector<DropItem::ColorType> colorList
+    {
+        BLUE,
+        RED,
+        BLACK,
+        GREEN,
+        ORANGE,
+        PURPLE,
+        YELLOW
+    };
+    
+    auto color = BLUE;
+    int i = mt() % colorList.size(); //リスト数で割った余り
+    if(i <= colorList.size())
+    {
+        color = colorList[i];
+    }
+    
+    return color;
 }
 
 void DropItem::setItemType(ColorType type)
