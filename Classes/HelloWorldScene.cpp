@@ -148,8 +148,7 @@ void HelloWorld::updateGamePlaying(float dt)
 {
     _elapseEntry += dt;
     
-    std::vector<float> elapseRotateList;
-    
+    // 移動
     for(auto i = 0; i < _dropItemList.size(); i++)
     {
         if (_dropItemList[i])
