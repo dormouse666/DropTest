@@ -7,10 +7,17 @@ USING_NS_CC;
 HelloWorld::HelloWorld()
 : _backGround(nullptr)
 , _dropItem(nullptr)
-, _elapse(0.0f)
-, _dropInterval(DROP_INTERVAL_DEFAULT)
-, _itemRotate(0)
+, _elapseEntry(0.0f)
+, _entryInterval(ENTRY_INTERVAL_DEFAULT)
 {
+    if(_dropItemList.size() != 0)
+    {
+        for(auto a : _dropItemList)
+        {
+            this->removeChild(a);
+        }
+    }
+    _dropItemList.clear();
 }
 
 // デストラクタ
@@ -109,6 +116,9 @@ void HelloWorld::entryItem()
     _dropItem = DropItem::create();
     _dropItem->setPosition(randomItemPositionX(), _backGround->getContentSize().height);
     _backGround->addChild(_dropItem);
+    
+    _dropItem->setTag(_dropItemList.size()); //tag付け
+    _dropItemList.push_back(_dropItem); //格納しておく
 }
 
 // dropItem出現位置をランダムに
@@ -136,33 +146,38 @@ void HelloWorld::update(float dt)
 
 void HelloWorld::updateGamePlaying(float dt)
 {
-    _elapse += dt;
+    _elapseEntry += dt;
     
-        if (_dropItem)
+    std::vector<float> elapseRotateList;
+    
+    for(auto i = 0; i < _dropItemList.size(); i++)
+    {
+        if (_dropItemList[i])
         {
-            if(_dropItem->canPlace(_dropItem, _backGround))
-            {
-            //下に動かす
-            _dropItem->setPosition(_dropItem->getPosition().x,
-                                   _dropItem->getPosition().y - 1);
+            CCLOG("tag: %d", _dropItemList[i]->getTag());
+            CCLOG("i: %d", i);
             
-                if(_elapse >= _dropInterval) //インターバル制御
-                {
-                    //回転する
-                    _itemRotate = _itemRotate + 20;
-                    _dropItem->setRotation(_itemRotate);
-                    _elapse = 0.0f; //戻す
-                }
+            if(_dropItemList[i]->canPlace(_dropItemList[i], _backGround))
+            {
+                //下に動かす
+                _dropItemList[i]->setPosition(_dropItemList[i]->getPosition().x,
+                                      _dropItemList[i]->getPosition().y - 1);
             }
             else
             {
-                if(_dropItem)
+                if(_dropItemList[i])
                 {
-                    _dropItem->removeFromParent();
-                    _dropItem = nullptr;
+                    _dropItemList[i]->removeFromParent();
+                    _dropItemList[i] = nullptr;
                 }
-                this->entryItem();
             }
         }
-        
+    }
+    
+    // 時間経過で新規item出現
+    if(_elapseEntry >= _entryInterval) //インターバル制御
+    {
+        this->entryItem();
+        _elapseEntry = 0.0f; //経過時間戻す
+    }
 }

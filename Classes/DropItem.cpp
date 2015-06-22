@@ -20,6 +20,10 @@ bool DropItem::init()
 }
 
 DropItem::DropItem()
+: _spr(nullptr)
+, _itemRotate(0)
+, _elapseRotate(0.0f)
+, _rotateInterval(ROTATE_INTERVAL_DEFAULT)
 {
 }
 
@@ -33,6 +37,9 @@ void DropItem::onEnter()
 
     // アイテムカラーをランダムにしてセット
     setItemType(randomItemColor());
+    
+    // スケジュール走らせる
+    this->scheduleUpdate();
 }
 void DropItem::onExit()
 {
@@ -109,4 +116,29 @@ bool DropItem::canPlace(DropItem* dropItem, cocos2d::Node* backGround)
     }
     
     return true;
+}
+
+// 傾き設定
+void DropItem::setItemRotate(int rotate)
+{
+    _itemRotate = rotate;
+    _spr->setRotation(_itemRotate);
+}
+
+int DropItem::getItemRotate()
+{
+    return _itemRotate;
+}
+
+void DropItem::update(float dt)
+{
+    _elapseRotate += dt;
+    
+    if(_elapseRotate >= _rotateInterval) //インターバル制御
+    {
+        //回転する
+        auto rotate = this->getItemRotate() + 20;
+        this->setItemRotate(rotate);
+        _elapseRotate = 0.0f; //戻す
+    }
 }

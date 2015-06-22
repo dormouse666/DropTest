@@ -12,6 +12,8 @@
 class DropItem : public cocos2d::Node
 {
 public:
+    constexpr static const float ROTATE_INTERVAL_DEFAULT = 0.2f;
+    
     enum ColorType {
         BLUE,
         RED,
@@ -36,10 +38,18 @@ public:
     void setItemType(ColorType type);
     
     bool canPlace(DropItem* _dropItem, cocos2d::Node* _backGround);
+    
+    void setItemRotate(int rotate);
+    int getItemRotate();
+    
+    void update(float dt);
 
 private:
     cocos2d::Sprite* _spr;
     
+    int _itemRotate;
+    float _elapseRotate;
+    float _rotateInterval;
 };
 
 #endif /* defined(__dormouseTest__DropItem__) */

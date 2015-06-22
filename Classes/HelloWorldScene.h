@@ -8,7 +8,7 @@ class DropItem;
 class HelloWorld : public cocos2d::Layer
 {
 public:
-    constexpr static const float DROP_INTERVAL_DEFAULT = 0.2f;
+    constexpr static const float ENTRY_INTERVAL_DEFAULT = 2.0f;
     
 public:
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
@@ -39,10 +39,12 @@ public:
 
 private:
     cocos2d::Node* _backGround;
+    
     DropItem* _dropItem;
-    float _elapse;
-    float _dropInterval;
-    int _itemRotate;
+    std::vector<DropItem*> _dropItemList;
+    
+    float _elapseEntry;
+    float _entryInterval;
 };
 
 #endif // __HELLOWORLD_SCENE_H__
