@@ -34,6 +34,8 @@ public:
     
     void update(float dt);
     void updateGamePlaying(float dt);
+    
+    float randomItemPositionX();
 
 private:
     cocos2d::Node* _backGround;

@@ -107,9 +107,26 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 void HelloWorld::entryItem()
 {
     _dropItem = DropItem::create();
-    _dropItem->setPosition(_backGround->getContentSize().width / 2, _backGround->getContentSize().height);
+    _dropItem->setPosition(randomItemPositionX(), _backGround->getContentSize().height);
     _backGround->addChild(_dropItem);
+}
+
+// dropItem出現位置をランダムに
+float HelloWorld::randomItemPositionX()
+{
+    std::random_device rnd; //乱数の生成
+    std::mt19937 mt(rnd()); //乱数生成器
     
+    auto w = _backGround->getContentSize().width;
+    
+    auto itemPositionX = w / 2; //とりあえず真ん中
+    int i = mt() % static_cast<int>(w); //背景のwidthで割った余り
+    if(i <= w)
+    {
+        itemPositionX = i;
+    }
+    
+    return itemPositionX;
 }
 
 void HelloWorld::update(float dt)
