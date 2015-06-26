@@ -134,7 +134,7 @@ float HelloWorld::randomItemPositionX()
     if(i <= w)
     {
         // dropItemの対角線の半分バッファを取りたい
-        float diagonal = _dropItem->getDiagonal(_dropItem) / 2;
+        float diagonal = _dropItem->getDiagonal() / 2;
         
         // 出現範囲
         float minX = _backGround->getPositionX() - _backGround->getContentSize().width/2 + diagonal;
@@ -174,7 +174,7 @@ void HelloWorld::updateGamePlaying(float dt)
             CCLOG("tag: %d", _dropItemList[i]->getTag());
             CCLOG("i: %d", i);
             
-            if(_dropItemList[i]->canPlace(_dropItemList[i], _backGround))
+            if(_dropItemList[i]->canPlace(_backGround))
             {
                 //下に動かす
                 _dropItemList[i]->setPosition(_dropItemList[i]->getPosition().x,

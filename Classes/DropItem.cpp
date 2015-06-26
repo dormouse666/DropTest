@@ -103,13 +103,13 @@ void DropItem::setItemType(ColorType type)
 }
 
 // 動かせるか判定
-bool DropItem::canPlace(DropItem* dropItem, cocos2d::Node* backGround)
+bool DropItem::canPlace(cocos2d::Node* backGround)
 {
     // 親の座標に変換
-    auto itemPos = backGround->convertToWorldSpace(dropItem->getPosition());
+    auto itemPos = backGround->convertToWorldSpace(this->getPosition());
     
     // dropItemの対角線の半分バッファを取りたい
-    float diagonal = getDiagonal(dropItem) / 2;
+    float diagonal = this->getDiagonal() / 2;
     
     // 動かせる範囲
     float minX = backGround->getPositionX() - backGround->getContentSize().width/2 + diagonal;
@@ -151,10 +151,10 @@ void DropItem::update(float dt)
 }
 
 // 対角線の長さを取得
-float DropItem::getDiagonal(DropItem* dropItem)
+float DropItem::getDiagonal()
 {
     // 長辺の2乗　＋　短辺の2乗　＝　対角線の2乗
-    float d = powf(dropItem->getContentSize().width, 2) + powf(dropItem->getContentSize().height, 2);
+    float d = powf(this->getContentSize().width, 2) + powf(this->getContentSize().height, 2);
     
     // 平方根
     float diagonal = sqrtf(d);

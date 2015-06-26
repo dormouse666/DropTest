@@ -37,14 +37,14 @@ public:
     ColorType randomItemColor();
     void setItemType(ColorType type);
     
-    bool canPlace(DropItem* _dropItem, cocos2d::Node* _backGround);
+    bool canPlace(cocos2d::Node* _backGround);
     
     void setItemRotate(int rotate);
     int getItemRotate();
     
     void update(float dt);
     
-    float getDiagonal(DropItem* dropItem);
+    float getDiagonal();
 
 private:
     cocos2d::Sprite* _spr;
