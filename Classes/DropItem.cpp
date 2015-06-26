@@ -96,18 +96,25 @@ void DropItem::setItemType(ColorType type)
     if(_spr)
     {
         this->addChild(_spr);
+        
+        // nodeのサイズを合わせる
+        this->setContentSize(_spr->getContentSize());
     }
 }
 
 // 動かせるか判定
 bool DropItem::canPlace(DropItem* dropItem, cocos2d::Node* backGround)
 {
-    //親の座標に変換
+    // 親の座標に変換
     auto itemPos = backGround->convertToWorldSpace(dropItem->getPosition());
-
-    auto minX = backGround->getPositionX() - backGround->getContentSize().width/2;
-    auto maxX = backGround->getPositionX() + backGround->getContentSize().width/2;
-    auto minY = backGround->getPositionY() - backGround->getContentSize().height/2;
+    
+    // dropItemの対角線の半分バッファを取りたい
+    float diagonal = getDiagonal(dropItem) / 2;
+    
+    // 動かせる範囲
+    float minX = backGround->getPositionX() - backGround->getContentSize().width/2 + diagonal;
+    float maxX = backGround->getPositionX() + backGround->getContentSize().width/2 - diagonal;
+    float minY = backGround->getPositionY() - backGround->getContentSize().height/2 + diagonal;
     //auto maxY = backGround->getPositionY() + backGround->getContentSize().height/2;
     
     if(itemPos.x < minX || itemPos.x >= maxX || itemPos.y < minY)
@@ -141,4 +148,16 @@ void DropItem::update(float dt)
         this->setItemRotate(rotate);
         _elapseRotate = 0.0f; //戻す
     }
+}
+
+// 対角線の長さを取得
+float DropItem::getDiagonal(DropItem* dropItem)
+{
+    // 長辺の2乗　＋　短辺の2乗　＝　対角線の2乗
+    float d = powf(dropItem->getContentSize().width, 2) + powf(dropItem->getContentSize().height, 2);
+    
+    // 平方根
+    float diagonal = sqrtf(d);
+    
+    return diagonal;
 }

@@ -133,7 +133,25 @@ float HelloWorld::randomItemPositionX()
     int i = mt() % static_cast<int>(w); //背景のwidthで割った余り
     if(i <= w)
     {
-        itemPositionX = i;
+        // dropItemの対角線の半分バッファを取りたい
+        float diagonal = _dropItem->getDiagonal(_dropItem) / 2;
+        
+        // 出現範囲
+        float minX = _backGround->getPositionX() - _backGround->getContentSize().width/2 + diagonal;
+        float maxX = _backGround->getPositionX() + _backGround->getContentSize().width/2 - diagonal;
+        
+        if(minX >= i)
+        {
+            itemPositionX = i + diagonal;
+        }
+        else if(maxX <= i)
+        {
+            itemPositionX = i - diagonal;
+        }
+        else
+        {
+            itemPositionX = i;
+        }
     }
     
     return itemPositionX;
@@ -160,7 +178,7 @@ void HelloWorld::updateGamePlaying(float dt)
             {
                 //下に動かす
                 _dropItemList[i]->setPosition(_dropItemList[i]->getPosition().x,
-                                      _dropItemList[i]->getPosition().y - 1);
+                                              _dropItemList[i]->getPosition().y - 1);
             }
             else
             {

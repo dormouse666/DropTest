@@ -43,6 +43,8 @@ public:
     int getItemRotate();
     
     void update(float dt);
+    
+    float getDiagonal(DropItem* dropItem);
 
 private:
     cocos2d::Sprite* _spr;
