@@ -16,6 +16,9 @@ bool DropItem::init()
         return false;
     }
     
+    // アイテムカラーをランダムにしてセット
+    setItemType(randomItemColor());
+    
     return true;
 }
 
@@ -34,9 +37,6 @@ DropItem::~DropItem()
 void DropItem::onEnter()
 {
     Node::onEnter();
-
-    // アイテムカラーをランダムにしてセット
-    setItemType(randomItemColor());
     
     // スケジュール走らせる
     this->scheduleUpdate();

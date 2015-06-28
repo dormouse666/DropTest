@@ -82,7 +82,7 @@ void HelloWorld::onEnter()
         
         // 適当に色つけとく
         auto color = LayerGradient::create(Color4B(255, 255, 255, 255), Color4B(8, 8, 8, 255), Point(1, 1));
-        color->setContentSize({visibleSize.width * 0.7f, visibleSize.height * 0.6f});
+        color->setContentSize(_backGround->getContentSize());
         _backGround->addChild(color);
         
         this->addChild(_backGround);
@@ -115,6 +115,13 @@ void HelloWorld::entryItem()
 {
     _dropItem = DropItem::create();
     _dropItem->setPosition(randomItemPositionX(), _backGround->getContentSize().height);
+    
+    /** よくわかってないのでログ
+    //_dropItem->setPosition(_backGround->getContentSize().width/2, _backGround->getContentSize().height/2);  //真ん中に出る
+    //_dropItem->setPosition(_backGround->getPosition().x, _backGround->getPosition().y); //数値としては320, 568 真ん中に出てくれない
+    //_dropItem->setPosition(0, 0); //左下に出る
+     **/
+    
     _backGround->addChild(_dropItem);
     
     _dropItem->setTag(_dropItemList.size()); //tag付け
@@ -137,14 +144,14 @@ float HelloWorld::randomItemPositionX()
         float diagonal = _dropItem->getDiagonal() / 2;
         
         // 出現範囲
-        float minX = _backGround->getPositionX() - _backGround->getContentSize().width/2 + diagonal;
-        float maxX = _backGround->getPositionX() + _backGround->getContentSize().width/2 - diagonal;
+        float minX = diagonal;
+        float maxX = (w / 2) - diagonal;
         
         if(minX >= i)
         {
             itemPositionX = i + diagonal;
         }
-        else if(maxX <= i)
+        else if(i >= maxX)
         {
             itemPositionX = i - diagonal;
         }
