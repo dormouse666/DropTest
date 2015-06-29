@@ -75,6 +75,7 @@
 		F828B3231B3699EA0014CDD8 /* block_red.png in Resources */ = {isa = PBXBuildFile; fileRef = F828B31C1B3699EA0014CDD8 /* block_red.png */; };
 		F828B3241B3699EA0014CDD8 /* block_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = F828B31D1B3699EA0014CDD8 /* block_yellow.png */; };
 		F828B3271B369A1C0014CDD8 /* DropItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F828B3251B369A1C0014CDD8 /* DropItem.cpp */; };
+		F8C715B31B41A3BD00429916 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8C715B11B41A3BD00429916 /* Player.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,6 +177,8 @@
 		F828B31D1B3699EA0014CDD8 /* block_yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = block_yellow.png; sourceTree = "<group>"; };
 		F828B3251B369A1C0014CDD8 /* DropItem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DropItem.cpp; sourceTree = "<group>"; };
 		F828B3261B369A1C0014CDD8 /* DropItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropItem.h; sourceTree = "<group>"; };
+		F8C715B11B41A3BD00429916 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
+		F8C715B21B41A3BD00429916 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -319,6 +322,8 @@
 				46880B8719C43A87006E1F66 /* HelloWorldScene.h */,
 				F828B3251B369A1C0014CDD8 /* DropItem.cpp */,
 				F828B3261B369A1C0014CDD8 /* DropItem.h */,
+				F8C715B11B41A3BD00429916 /* Player.cpp */,
+				F8C715B21B41A3BD00429916 /* Player.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -525,6 +530,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
+				F8C715B31B41A3BD00429916 /* Player.cpp in Sources */,
 				F828B3271B369A1C0014CDD8 /* DropItem.cpp in Sources */,
 				46880B8A19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
